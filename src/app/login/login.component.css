@@ -1,0 +1,13 @@
+form {
+    width: 500px;
+    margin: 0 auto;
+}
+
+input.form-control {
+    margin-bottom: 25px;
+    border-radius: 5px;
+}
+
+p:first-of-type:hover {
+    cursor: pointer;
+}
