@@ -7,6 +7,14 @@ form {
     margin: 50px 20%;
 }
 
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.error-text {
+    color: red !important;
+}
+
 @media (max-width: 1000px) {
     .card {
         margin: 50px 10%;
