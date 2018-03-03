@@ -7,11 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderBannerComponent implements OnInit {
   title = 'Harbinger System';
-  navLinks = [
-    'Home',
-    'How-To-Use',
-    'About Us'
-  ];
 
   constructor() { }
 

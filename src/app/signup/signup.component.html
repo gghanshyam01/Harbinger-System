@@ -1,12 +1,11 @@
 <div class="container">
-  <!-- <div class=""> -->
     <div class="card">
       <div class="card-header text-center">
-        <h5>Log In</h5>
+        <h5>Sign Up</h5>
       </div>
       <div class="card-block">
         <br>
-        <form (ngSubmit)="onSignin(f)" #f="ngForm">
+        <form (ngSubmit)="onSignup(f)" #f="ngForm">
           <div class="form-group">
             <label for="username">Username</label>
             <input type="text" 
@@ -25,14 +24,12 @@
               placeholder="Password" 
               required ngModel>
           </div>
-          <button class="btn btn-primary btn-block" type="submit">Log in</button>
+          <button class="btn btn-primary btn-block" type="submit">Register</button>
         </form>
         <div class="text-center">
-          <a routerLink="/signup">Need an Account? Register here</a>
+          <a routerLink="/login">Already have an Account? Log In</a>
           <p class="mt-5 mb-3 text-muted text-center">&copy; 2018-2019</p>
         </div>
       </div>
     </div>
-  <!-- </div> -->
-
-</div>
+  </div>
