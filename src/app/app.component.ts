@@ -10,7 +10,7 @@ import * as firebase from 'firebase';
   ]
 })
 export class AppComponent implements OnInit {
-  title = 'Harbinger System';
+  title = 'Emergency Services for Harbinger System';
 
   ngOnInit() {
     const config = {

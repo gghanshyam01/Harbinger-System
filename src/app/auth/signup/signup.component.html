@@ -20,7 +20,7 @@
 									ngModel>
 								<span class="help-block text-muted error-text"
 									*ngIf="!firstName.valid && firstName.touched">
-									Please enter a valid First Name</span>
+									First Name can't be blank</span>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -36,7 +36,7 @@
 									ngModel>
 								<span class="help-block text-muted error-text"
 									*ngIf="!lastName.valid && lastName.touched">
-									Please enter a valid Last Name</span>
+									Last Name can't be blank</span>
 							</div>
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 							ngModel>
 						<span class="help-block text-muted error-text"
 							*ngIf="!username.valid && username.touched">
-							Please enter a valid Username</span>
+							Username can't be blank</span>
 					</div>
 					<div class="form-group">
 						<label for="email">Email</label>
@@ -82,13 +82,32 @@
 							ngModel>
 							<span class="help-block text-muted error-text"
 								*ngIf="!password.valid && password.touched">
-								Please enter a valid Password</span>
+								Password should be of minimum 6 characters</span>
+					</div>
+					<div class="form-group">
+						<label for="confirmPassword">Confirm Password</label>
+						<input type="password" 
+							class="form-control" 
+							name="confirmPassword" 
+							id="confirmPassword" 
+							placeholder="Confirm Password" 
+							#confirmPassword="ngModel"
+							minlength="6"
+							required
+							ngModel>
+							<span class="help-block text-muted error-text"
+								*ngIf="!confirmPassword.valid && confirmPassword.touched">
+								Password should be of minimum 6 characters</span>
+							<span class="help-block text-muted error-text"
+								*ngIf="confirmPassword.value !== password.value && confirmPassword.touched">
+								Passwords do not match</span>
 					</div>
 					<div ngClass="{{ status }}" 
 						style="padding: 0px"
 						*ngIf="f.pristine">{{ message }}</div>
 					<button class="btn btn-primary btn-block" 
-						type="submit">Register
+						type="submit"
+						[disabled]="f.invalid">Register
 					</button>
 				</form>
 				<div class="text-center">

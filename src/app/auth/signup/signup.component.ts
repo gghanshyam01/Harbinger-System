@@ -16,12 +16,14 @@ export class SignupComponent implements OnInit {
   constructor(private authService: AuthService) {
     // this.message = '';
   }
-
+  
   ngOnInit() {
   }
 
   onSignup(form: NgForm) {
-    console.log(form);
+    if (form.value.password !== form.value.confirmPassword) {
+      return;
+    }
     try {
       const email: string = form.value.email;
       const password: string = form.value.password;
@@ -34,6 +36,7 @@ export class SignupComponent implements OnInit {
         email,
         password
       };
+      console.log(this.user);
       this.authService.signupUser(email, password)
         .then((res) => {
           this.authService.createUser(this.user)
@@ -43,13 +46,11 @@ export class SignupComponent implements OnInit {
               throw new Error(err);
             });
           this.status = 'alert alert-success';
-          this.message = 'User signed-up successfully.';
+          this.message = 'User created successfully.';
         }).catch((err) => {
-          const errorCode = err.code;
-          const errorMsg = err.message;
-          console.log(errorMsg);
+          console.log(err.message);
           this.status = 'alert alert-warning';
-          this.message = errorMsg;
+          this.message = err.message;
         });
     } catch (err) {
       // console.log('Some error occurred.');
