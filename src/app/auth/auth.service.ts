@@ -1,22 +1,39 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as firebase from 'firebase';
 
 import { User } from './../shared/models/user.model';
-import * as firebase from 'firebase';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
-  URL = 'https://harbinger-system.firebaseio.com/user.json';
-
-  constructor(private http: HttpClient) { }
-
-  signupUser(username: string, password: string) {
-    return firebase.auth().createUserWithEmailAndPassword(username, password);
+  token: string;
+  constructor() {
   }
 
-  createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.URL, user);
+  signupUser(user: User): Promise<any> {
+    return firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then((res) => {
+      return this.addUserData(user);
+    });
+  }
+
+  addUserData(user: User): Promise<any> {
+    const uid = firebase.auth().currentUser.uid;
+    return firebase.database().ref('users').child(uid).set(user);
+  }
+
+  signinUser(email: string, password: string) {
+    if (this.token !== undefined) { return console.log('Already Logged In'); }
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(res => firebase.auth().currentUser.getIdToken())
+      .then(token => {
+        this.token = token;
+        console.log('Token', this.token);
+      });
+  }
+
+  getToken(): string {
+    firebase.auth().currentUser.getIdToken()
+      .then(token => this.token = token);
+    return this.token;
   }
 
 }

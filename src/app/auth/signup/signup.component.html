@@ -49,7 +49,7 @@
 							placeholder="Username" 
 							#username="ngModel"
 							required 
-							ngModel>
+							ngModel />
 						<span class="help-block text-muted error-text"
 							*ngIf="!username.valid && username.touched">
 							Username can't be blank</span>
@@ -107,7 +107,7 @@
 						*ngIf="f.pristine">{{ message }}</div>
 					<button class="btn btn-primary btn-block" 
 						type="submit"
-						[disabled]="f.invalid">Register
+						[disabled]="f.invalid">{{ registerButton }}
 					</button>
 				</form>
 				<div class="text-center">
