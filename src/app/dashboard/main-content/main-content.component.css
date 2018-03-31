@@ -1,0 +1,9 @@
+
+.main {
+    height: 100%;
+    border: 0px solid;
+    position: fixed;
+    right: 0;
+    padding: 10px;
+    border: 1px solid red;
+}
