@@ -17,8 +17,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSignin(form: NgForm) {
-    this.authService.signinUser(form.value.email, form.value.password);
-    // console.log('Token',  this.authService.getToken());
+    this.loginButton = 'Logging In...';
+    try {
+      this.authService.signinUser(form.value.email, form.value.password).then(res => {
+        form.reset();
+        this.status = res.status;
+        this.message = res.msg;
+      });
+    } catch (err) {
+      console.log('Already Logged In');
+    }
+    this.loginButton = 'Log In';
   }
 
 }

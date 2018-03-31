@@ -9,10 +9,14 @@ import { HeaderBannerComponent } from './header-banner/header-banner.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthService } from './auth/auth.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MainContentComponent } from './dashboard/main-content/main-content.component';
+import { SidebarListComponent } from './dashboard/sidebar-list/sidebar-list.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent }
+  { path: 'signup', component: SignupComponent },
+  { path: 'dashboard', component: DashboardComponent }
 ];
 
 @NgModule({
@@ -20,7 +24,10 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderBannerComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent,
+    MainContentComponent,
+    SidebarListComponent
   ],
   imports: [
     BrowserModule,

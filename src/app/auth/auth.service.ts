@@ -10,9 +10,8 @@ export class AuthService {
   }
 
   signupUser(user: User): Promise<any> {
-    return firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then((res) => {
-      return this.addUserData(user);
-    });
+    return firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+      .then(res => this.addUserData(user));
   }
 
   addUserData(user: User): Promise<any> {
@@ -21,12 +20,23 @@ export class AuthService {
   }
 
   signinUser(email: string, password: string) {
-    if (this.token !== undefined) { return console.log('Already Logged In'); }
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(res => firebase.auth().currentUser.getIdToken())
-      .then(token => {
+    if (this.token !== undefined) { return; }
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(res => {
+        return firebase.auth().currentUser.getIdToken();
+      }).then(token => {
         this.token = token;
-        console.log('Token', this.token);
+        console.log('reached 2nd then');
+        return {
+          status: 'alert alert-success',
+          msg: 'User log in successful'
+        };
+      }).catch(err => {
+        console.log('reached catch ');
+        return {
+          status: 'alert alert-warning',
+          msg: err.message
+        };
       });
   }
 
