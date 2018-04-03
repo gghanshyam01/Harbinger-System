@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/Router';
 
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+
 import { AppComponent } from './app.component';
 import { HeaderBannerComponent } from './header-banner/header-banner.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -33,7 +36,11 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBnjAUdZ0I_9ziyLEWyY17pnEeTu00cvz8'
+    }),
+    AgmDirectionModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

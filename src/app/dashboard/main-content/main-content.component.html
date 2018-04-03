@@ -1,2 +1,15 @@
 <div class="col-md-9 main">
+    <!-- <iframe width="600" height="450" 
+        frameborder="0" 
+        style="border:0" 
+        src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAPMLh-D1iDJqGpoAwBUJllUaS7vvPWm8g&q=Space+Needle,Seattle+WA" 
+        allowfullscreen>
+    </iframe> -->
+
+    <agm-map *ngIf="dir" [latitude]='dir.origin.lat' [longitude]='dir.origin.lng'>
+        <agm-direction *ngIf='dir' [origin]='dir.origin' [destination]='dir.destination'>
+        </agm-direction>
+    </agm-map>
+
+
 </div>

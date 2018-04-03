@@ -11,3 +11,13 @@
     margin: 10px 0px !important;
 }
 
+a:hover {
+    cursor: pointer;
+    color: #007BFF !important;
+    background-color: #E3F2FD; 
+}
+
+a.active {
+    color: white !important;
+}
+
