@@ -11,10 +11,12 @@ import { AppComponent } from './app.component';
 import { HeaderBannerComponent } from './header-banner/header-banner.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { AuthService } from './auth/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainContentComponent } from './dashboard/main-content/main-content.component';
 import { SidebarListComponent } from './dashboard/sidebar-list/sidebar-list.component';
+
+import { AuthService } from './auth/auth.service';
+import { MapDataShareService } from './dashboard/shared/map-data-share.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,7 +44,7 @@ const appRoutes: Routes = [
     }),
     AgmDirectionModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, MapDataShareService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

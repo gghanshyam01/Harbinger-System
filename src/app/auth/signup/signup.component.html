@@ -1,4 +1,5 @@
-<div class="container">
+<div class="row">
+	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header text-center">
 				<h5>New user? Sign Up</h5>
@@ -10,104 +11,53 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="firstName">First Name</label>
-								<input type="text" 
-									class="form-control" 
-									name="firstName" 
-									id="firstName" 
-									placeholder="First Name" 
-									#firstName="ngModel"
-									required 
-									ngModel>
-								<span class="help-block text-muted error-text"
-									*ngIf="!firstName.valid && firstName.touched">
+								<input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" #firstName="ngModel" required
+								 ngModel>
+								<span class="help-block text-muted error-text" *ngIf="!firstName.valid && firstName.touched">
 									First Name can't be blank</span>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="lastName">Last Name</label>
-								<input type="text" 
-									class="form-control" 
-									name="lastName" 
-									id="lastName" 
-									placeholder="Last Name" 
-									#lastName="ngModel"
-									required 
-									ngModel>
-								<span class="help-block text-muted error-text"
-									*ngIf="!lastName.valid && lastName.touched">
+								<input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name" #lastName="ngModel" required
+								 ngModel>
+								<span class="help-block text-muted error-text" *ngIf="!lastName.valid && lastName.touched">
 									Last Name can't be blank</span>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="username">Username</label>
-						<input type="text" 
-							class="form-control" 
-							name="username" 
-							id="username" 
-							placeholder="Username" 
-							#username="ngModel"
-							required 
-							ngModel />
-						<span class="help-block text-muted error-text"
-							*ngIf="!username.valid && username.touched">
+						<input type="text" class="form-control" name="username" id="username" placeholder="Username" #username="ngModel" required
+						 ngModel />
+						<span class="help-block text-muted error-text" *ngIf="!username.valid && username.touched">
 							Username can't be blank</span>
 					</div>
 					<div class="form-group">
 						<label for="email">Email</label>
-						<input type="email" 
-							class="form-control" 
-							name="email" 
-							id="email" 
-							placeholder="Email" 
-							#email="ngModel"
-							required 
-							email
-							ngModel>
-						<span class="help-block text-muted error-text"
-							*ngIf="!email.valid && email.touched">
+						<input type="email" class="form-control" name="email" id="email" placeholder="Email" #email="ngModel" required email ngModel>
+						<span class="help-block text-muted error-text" *ngIf="!email.valid && email.touched">
 							Please enter a valid Email ID</span>
 					</div>
 					<div class="form-group">
 						<label for="password">Password</label>
-						<input type="password" 
-							class="form-control" 
-							name="password" 
-							id="password" 
-							placeholder="Password" 
-							#password="ngModel"
-							minlength="6"
-							required
-							ngModel>
-							<span class="help-block text-muted error-text"
-								*ngIf="!password.valid && password.touched">
-								Password should be of minimum 6 characters</span>
+						<input type="password" class="form-control" name="password" id="password" placeholder="Password" #password="ngModel" minlength="6"
+						 required ngModel>
+						<span class="help-block text-muted error-text" *ngIf="!password.valid && password.touched">
+							Password should be of minimum 6 characters</span>
 					</div>
 					<div class="form-group">
 						<label for="confirmPassword">Confirm Password</label>
-						<input type="password" 
-							class="form-control" 
-							name="confirmPassword" 
-							id="confirmPassword" 
-							placeholder="Confirm Password" 
-							#confirmPassword="ngModel"
-							minlength="6"
-							required
-							ngModel>
-							<span class="help-block text-muted error-text"
-								*ngIf="!confirmPassword.valid && confirmPassword.touched">
-								Password should be of minimum 6 characters</span>
-							<span class="help-block text-muted error-text"
-								*ngIf="confirmPassword.value !== password.value && confirmPassword.touched">
-								Passwords do not match</span>
+						<input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" #confirmPassword="ngModel"
+						 minlength="6" required ngModel>
+						<span class="help-block text-muted error-text" *ngIf="!confirmPassword.valid && confirmPassword.touched">
+							Password should be of minimum 6 characters</span>
+						<span class="help-block text-muted error-text" *ngIf="confirmPassword.value !== password.value && confirmPassword.touched">
+							Passwords do not match</span>
 					</div>
-					<div ngClass="{{ status }}" 
-						style="padding: 0px"
-						*ngIf="f.pristine">{{ message }}</div>
-					<button class="btn btn-primary btn-block" 
-						type="submit"
-						[disabled]="f.invalid">{{ registerButton }}
+					<div ngClass="{{ status }}" style="padding: 0px" *ngIf="f.pristine">{{ message }}</div>
+					<button class="btn btn-primary btn-block" type="submit" [disabled]="f.invalid">{{ registerButton }}
 					</button>
 				</form>
 				<div class="text-center">
@@ -117,3 +67,4 @@
 			</div>
 		</div>
 	</div>
+</div>

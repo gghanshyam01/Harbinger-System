@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+
+import { MapDataShareService } from './../shared/map-data-share.service';
 
 @Component({
   selector: 'app-sidebar-list',
@@ -7,7 +8,6 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./sidebar-list.component.css']
 })
 export class SidebarListComponent implements OnInit {
-  selectedItem = new Subject<string>();
   items = [
     'Home',
     'Profile',
@@ -15,14 +15,13 @@ export class SidebarListComponent implements OnInit {
     'Settings'
   ];
 
-  constructor() { }
+  constructor(private mapService: MapDataShareService) { }
 
   ngOnInit() {
   }
 
-  onItemSelect(evt) {
-    this.selectedItem.next('hi from Subject');
-    console.log(evt);
+  onItemSelect(item: string) {
+    this.mapService.itemSelected(item);
   }
 
 }
