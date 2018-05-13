@@ -5,6 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../../auth/auth.service';
+import { Locations } from './location.model';
 
 @Injectable()
 export class MapDataShareService {
@@ -21,7 +22,6 @@ export class MapDataShareService {
     firebase.auth().onAuthStateChanged(user => {
       return this.db.list('/locations').valueChanges();
     });
-    console.log(this.authService.getToken());
-    return this.db.list('/locations').valueChanges();
+    return this.db.list<Locations[]>('/locations').snapshotChanges();
   }
 }

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { MapDataShareService } from './../shared/map-data-share.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Locations } from '../shared/location.model';
 
 @Component({
   selector: 'app-sidebar-list',
@@ -17,21 +18,28 @@ export class SidebarListComponent implements OnInit, OnDestroy {
   //   'Settings'
   // ];
 
-  $itemsSubscription: Subscription;
-  items: any;
+  itemsSubscription$: Subscription;
+  items: Locations[] = [];
   constructor(private mapService: MapDataShareService) { }
 
   ngOnInit() {
-    this.$itemsSubscription = this.mapService.getItems().subscribe(next => {
-      this.items = next;
+    this.itemsSubscription$ = this.mapService.getItems().subscribe(elems => {
+      elems.forEach(elem => {
+        this.items.push({
+          name: elem.key,
+          value: elem.payload.val()
+        });
+      });
     });
   }
+
+
   onItemSelect(item: string) {
     this.mapService.itemSelected(item);
   }
 
   ngOnDestroy() {
-    this.$itemsSubscription.unsubscribe();
+    this.itemsSubscription$.unsubscribe();
   }
 
 }
