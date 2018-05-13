@@ -1,5 +1,5 @@
-agm-map {
-    height: 400px;
+#map {
+    padding-right: 2px;
 }
 
 .holder {

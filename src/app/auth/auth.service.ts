@@ -5,7 +5,7 @@ import { User } from './../shared/models/user.model';
 
 @Injectable()
 export class AuthService {
-  token: string;
+  token: string = null;
 
   constructor() {
   }
@@ -21,12 +21,14 @@ export class AuthService {
   }
 
   signinUser(email: string, password: string) {
-    if (this.token !== undefined) { return; }
+    if (firebase.auth().currentUser !== null) { return; }
+
     return firebase.auth().signInWithEmailAndPassword(email, password)
       .then(res => {
         return firebase.auth().currentUser.getIdToken();
       }).then(token => {
         this.token = token;
+        console.log(this.token);
         console.log('reached 2nd then');
         return {
           status: 'alert alert-success',
@@ -41,10 +43,33 @@ export class AuthService {
       });
   }
 
-  getToken(): string {
-    firebase.auth().currentUser.getIdToken()
-      .then(token => this.token = token);
-    return this.token;
+  getToken() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        user.getIdToken()
+          .then(token => this.token = token);
+      } else {
+        this.token = null;
+      }
+    });
+  }
+
+  logoutUser(): Promise<any> {
+    this.token = null;
+    return firebase.auth().signOut();
+  }
+
+  isLoggedIn() {
+    const promise = new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+    return promise;
   }
 
 }
