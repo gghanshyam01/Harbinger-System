@@ -4,5 +4,11 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyAXmZj2C6kSKgrNDLbI7Pjgv3nhl79ADxg',
+    authDomain: 'harbinger-system.firebaseapp.com',
+    databaseURL: 'https://harbinger-system.firebaseio.com',
+    projectId: 'harbinger-system'
+  }
 };

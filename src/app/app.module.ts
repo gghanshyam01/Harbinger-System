@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/Router';
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { HeaderBannerComponent } from './header-banner/header-banner.component';
@@ -38,17 +39,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AngularFireModule.initializeApp({
-      apiKey: 'AIzaSyAXmZj2C6kSKgrNDLbI7Pjgv3nhl79ADxg',
-      authDomain: 'harbinger-system.firebaseapp.com',
-      databaseURL: 'https://harbinger-system.firebaseio.com',
-      projectId: 'harbinger-system'
-    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     RouterModule.forRoot(appRoutes)
-    // AgmCoreModule.forRoot({
-    //   apiKey: 'AIzaSyBnjAUdZ0I_9ziyLEWyY17pnEeTu00cvz8'
-    // }),
-    // AgmDirectionModule
   ],
   providers: [AuthService, MapDataShareService, AngularFireDatabase, AuthGuardService],
   bootstrap: [AppComponent]
