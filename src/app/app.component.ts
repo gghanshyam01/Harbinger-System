@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as firebase from 'firebase';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +14,8 @@ export class AppComponent implements OnInit {
   title = 'Emergency Services for Harbinger System';
 
   ngOnInit() {
-    const config = {
-      apiKey: 'AIzaSyAXmZj2C6kSKgrNDLbI7Pjgv3nhl79ADxg',
-      authDomain: 'harbinger-system.firebaseapp.com',
-      databaseURL: 'https://harbinger-system.firebaseio.com',
-      projectId: 'harbinger-system',
-      storageBucket: 'harbinger-system.appspot.com',
-      messagingSenderId: '361909493447'
-    };
     try {
-      firebase.initializeApp(config);
+      firebase.initializeApp(environment.firebaseConfig);
     } catch (e) {
       console.log('Failed to initialize Firebase SDK');
     }
