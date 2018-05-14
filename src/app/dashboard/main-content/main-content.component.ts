@@ -20,6 +20,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   directionsDisplay: google.maps.DirectionsRenderer;
   directionsService: google.maps.DirectionsService;
   marker: google.maps.Marker;
+  infoWindow: google.maps.InfoWindow;
 
   @ViewChild('mapContent') mapElement: ElementRef;
   @ViewChild('directionsPanel') panelElement: ElementRef;
@@ -27,15 +28,19 @@ export class MainContentComponent implements OnInit, OnDestroy {
   constructor(private mapService: MapDataShareService) { }
 
   ngOnInit() {
-    this.getCurrLocation();
+    this.showMap();
     this.subscription = this.mapService.item
       .subscribe(data => console.log('From Main: ', data));
   }
 
-  showMap(dir: Direction) {
+  showMap() {
     this.trafficLayer = new google.maps.TrafficLayer();
-    this.directionsDisplay = new google.maps.DirectionsRenderer();
+    this.directionsDisplay = new google.maps.DirectionsRenderer({
+      suppressPolylines: true,
+      infoWindow: this.infoWindow
+    });
     this.directionsService = new google.maps.DirectionsService();
+    this.infoWindow = new google.maps.InfoWindow();
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 13,
@@ -44,9 +49,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
         lng: 72.828809
       }
     });
-    google.maps.event.addListener(this.map, 'click', (event) => {
-      this.onMapClick(event);
-    });
+
     this.trafficLayer.setMap(this.map);
     this.directionsDisplay.setPanel(this.panelElement.nativeElement);
 
@@ -56,31 +59,57 @@ export class MainContentComponent implements OnInit, OnDestroy {
       travelMode: google.maps.TravelMode.DRIVING
     };
 
-    this.directionsService.route(request, (result, status) => {
+    this.directionsService.route(request,
+      (result: google.maps.DirectionsResult, status: google.maps.DirectionsStatus) => {
       if (status === google.maps.DirectionsStatus.OK) {
+        console.log(result);
+        this.plotCustomPath(result);
         this.directionsDisplay.setDirections(result);
         this.directionsDisplay.setMap(this.map);
       }
     });
   }
 
-  getCurrLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.dir = {
-          source: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          },
-          destination: {
-            lat: 19.384209,
-            lng: 72.828809
-          }
-        };
-        this.showMap(this.dir);
+  plotCustomPath(result: google.maps.DirectionsResult) {
+    const legs: google.maps.DirectionsLeg[] = result.routes[0].legs;
+    legs.forEach(leg => {
+      const steps: google.maps.DirectionsStep[] = leg.steps;
+      steps.forEach(step => {
+        const nextSegments = step.path;
+        const stepPolyline = new google.maps.Polyline({
+          strokeOpacity: 0.5,
+          strokeWeight: 4
+        });
+        nextSegments.forEach(nextSegment => {
+          stepPolyline.getPath().push(nextSegment);
+        });
+        stepPolyline.setMap(this.map);
+        google.maps.event.addListener(stepPolyline, 'click', (event) => {
+          this.infoWindow.setContent('Clicked at: ' + event.latLng.toUrlValue(6));
+          this.infoWindow.setPosition(event.latLng);
+          this.infoWindow.open(this.map);
+        });
       });
-    }
+    });
+
   }
+
+  // getCurrLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       this.dir = {
+  //         source: {
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude
+  //         },
+  //         destination: {
+  //           lat: 19.384209,
+  //           lng: 72.828809
+  //         }
+  //       };
+  //     });
+  //   }
+  // }
 
   onMapClick(evt) {
     console.log(evt.latLng.lat());

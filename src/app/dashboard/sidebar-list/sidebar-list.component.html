@@ -10,6 +10,7 @@
             type="search" 
             placeholder="Search" 
             aria-label="Search" 
+            (keyup)="onKeyUp($event.target.value)"
             style="width: calc(100% - 30px)">
           <i class="fa fa-search" aria-hidden="true"></i>
           <!-- <button class="btn btn-outline-success my-2 my-sm-0 searchBox" type="submit">

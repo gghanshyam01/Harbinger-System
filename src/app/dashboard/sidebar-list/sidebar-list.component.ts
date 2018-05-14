@@ -20,17 +20,31 @@ export class SidebarListComponent implements OnInit, OnDestroy {
 
   itemsSubscription$: Subscription;
   items: Locations[] = [];
+  locations: Locations[] = [];
+  searchTerm: string;
   constructor(private mapService: MapDataShareService) { }
 
   ngOnInit() {
+    this.fillItems();
+  }
+
+  fillItems() {
+    this.items = [];
     this.itemsSubscription$ = this.mapService.getItems().subscribe(elems => {
       elems.forEach(elem => {
-        this.items.push({
+        this.locations.push({
           name: elem.key,
           value: elem.payload.val()
         });
       });
     });
+    this.items = this.locations;
+  }
+  onKeyUp(val: string) {
+    this.searchTerm = val;
+    this.items = this.locations.filter(
+      location => location.value.toLowerCase().indexOf(val.toLowerCase()) > -1
+    );
   }
 
 
