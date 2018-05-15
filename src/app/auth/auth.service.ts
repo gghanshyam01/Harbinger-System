@@ -6,7 +6,7 @@ import { User } from './../shared/models/user.model';
 @Injectable()
 export class AuthService {
   token: string = null;
-
+  public authState = false;
   constructor() {
   }
 
@@ -56,6 +56,7 @@ export class AuthService {
 
   logoutUser(): Promise<any> {
     this.token = null;
+    this.authState = false;
     return firebase.auth().signOut();
   }
 
@@ -63,8 +64,10 @@ export class AuthService {
     const promise = new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
+          this.authState = true;
           resolve(true);
         } else {
+          this.authState = false;
           resolve(false);
         }
       });

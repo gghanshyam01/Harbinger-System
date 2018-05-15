@@ -8,29 +8,32 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" 
-        routerLink="/" 
+        routerLink="/home" 
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a class="nav-item nav-link" 
+      <!-- <a class="nav-item nav-link" 
         href="" 
         routerLinkActive="active">How-To-Use</a>
-      <a class="nav-item nav-link" 
+      <a class="nav-item nav-link"
         href="" 
-        routerLinkActive="active">About Us</a>
+        routerLinkActive="active">About Us</a> -->
       <!-- <a class="nav-item nav-link" href="#">Features</a>
       <a class="nav-item nav-link" href="#">Pricing</a> -->
     </div>
-    <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link" 
+    <div class="navbar-nav ml-auto"
+      *ngIf="!this.authService.authState">
+      <a class="nav-item nav-link"
         routerLink="/login" 
         routerLinkActive="active">Login</a>
     </div>
-    <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link" 
+    <div class="navbar-nav ml-auto"
+      *ngIf="!this.authService.authState">
+      <a class="nav-item nav-link"
         routerLink="/signup"
         routerLinkActive="active">Register</a>
     </div>
-    <div class="navbar-nav ml-auto">
+    <div class="navbar-nav ml-auto"
+      *ngIf="this.authService.authState">
       <a class="nav-item nav-link"
         (click)="onLogoutClick()">Logout</a>
     </div>

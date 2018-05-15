@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { AuthService } from './../auth.service';
 import { Router } from '@angular/Router';
+import { HeaderBannerComponent } from '../../header-banner/header-banner.component';
 
 @Component({
   selector: 'app-login',

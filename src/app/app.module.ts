@@ -11,6 +11,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainContentComponent } from './dashboard/main-content/main-content.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SidebarListComponent } from './dashboard/sidebar-list/sidebar-list.component';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -22,6 +23,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'home', component: LandingPageComponent },
   { path: 'dashboard', canActivate: [AuthGuardService], component: DashboardComponent }
 ];
 
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     SignupComponent,
     DashboardComponent,
     MainContentComponent,
-    SidebarListComponent
+    SidebarListComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
