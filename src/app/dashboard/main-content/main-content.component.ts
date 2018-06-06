@@ -71,6 +71,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
 
   plotCustomPath(result: google.maps.DirectionsResult) {
+    // const marker: google.maps.Marker = ; // = new google.maps.Marker();
     const legs: google.maps.DirectionsLeg[] = result.routes[0].legs;
     legs.forEach(leg => {
       const steps: google.maps.DirectionsStep[] = leg.steps;
@@ -85,9 +86,18 @@ export class MainContentComponent implements OnInit, OnDestroy {
         });
         stepPolyline.setMap(this.map);
         google.maps.event.addListener(stepPolyline, 'click', (event) => {
-          this.infoWindow.setContent('Clicked at: ' + event.latLng.toUrlValue(6));
-          this.infoWindow.setPosition(event.latLng);
-          this.infoWindow.open(this.map);
+          const marker = new google.maps.Marker({
+            animation: google.maps.Animation.DROP,
+            map: this.map,
+            icon: './assets/call-center-worker-with-headset-blue.png',
+            position: event.latLng,
+            title: 'Route divided at: ' + event.latLng.toUrlValue(6)
+          });
+          marker.addListener('click', () => {
+            marker.setMap(null);
+          });
+          // this.infoWindow.setPosition(event.latLng);
+          // this.infoWindow.open(this.map);
         });
       });
     });

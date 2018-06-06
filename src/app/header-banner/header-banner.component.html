@@ -20,13 +20,13 @@
       <!-- <a class="nav-item nav-link" href="#">Features</a>
       <a class="nav-item nav-link" href="#">Pricing</a> -->
     </div>
-    <div class="navbar-nav ml-auto"
+    <div class="navbar-nav"
       *ngIf="!this.authService.authState">
       <a class="nav-item nav-link"
         routerLink="/login" 
         routerLinkActive="active">Login</a>
     </div>
-    <div class="navbar-nav ml-auto"
+    <div class="navbar-nav"
       *ngIf="!this.authService.authState">
       <a class="nav-item nav-link"
         routerLink="/signup"

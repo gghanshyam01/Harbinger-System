@@ -21,7 +21,6 @@ export class SidebarListComponent implements OnInit, OnDestroy {
   itemsSubscription$: Subscription;
   items: Locations[] = [];
   locations: Locations[] = [];
-  searchTerm: string;
   constructor(private mapService: MapDataShareService) { }
 
   ngOnInit() {
@@ -41,7 +40,6 @@ export class SidebarListComponent implements OnInit, OnDestroy {
     this.items = this.locations;
   }
   onKeyUp(val: string) {
-    this.searchTerm = val;
     this.items = this.locations.filter(
       location => location.value.toLowerCase().indexOf(val.toLowerCase()) > -1
     );
